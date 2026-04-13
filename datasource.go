@@ -1,7 +1,9 @@
 package sortable
 
-type DataSource interface {
-	GetSortableList(minSortIndex, maxSortIndex int) ([]Element, error)
+import "context"
 
-	UpateSortableList(elements []Element) error
+type DataSource interface {
+	GetSortableElements(ctx context.Context, minSortIndex, maxSortIndex uint32) ([]Element, error)
+
+	UpateSortableElements(ctx context.Context, elements []Element) error
 }

@@ -1,6 +1,8 @@
 package sortable
 
-func Sort(dataSource DataSource, source Element, target Element) error {
+import "context"
+
+func Sort(ctx context.Context, dataSource DataSource, source, target Element) error {
 	if dataSource == nil || source == nil || target == nil {
 		return nil
 	}
@@ -11,8 +13,8 @@ func Sort(dataSource DataSource, source Element, target Element) error {
 	var sourceSortIndex = source.GetSortIndex()
 	var targetSortIndex = target.GetSortIndex()
 
-	var minSortIndex int
-	var maxSortIndex int
+	var minSortIndex uint32
+	var maxSortIndex uint32
 	if sourceSortIndex > targetSortIndex {
 		minSortIndex = targetSortIndex
 		maxSortIndex = sourceSortIndex
@@ -22,7 +24,7 @@ func Sort(dataSource DataSource, source Element, target Element) error {
 	}
 
 	// 取出 source、target 及两者之间的所有数据
-	elements, err := dataSource.GetSortableList(minSortIndex, maxSortIndex)
+	elements, err := dataSource.GetSortableElements(ctx, minSortIndex, maxSortIndex)
 	if err != nil {
 		return err
 	}
@@ -42,7 +44,7 @@ func Sort(dataSource DataSource, source Element, target Element) error {
 		}
 	}
 
-	if err = dataSource.UpateSortableList(elements); err != nil {
+	if err = dataSource.UpateSortableElements(ctx, elements); err != nil {
 		return err
 	}
 

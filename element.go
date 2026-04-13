@@ -1,9 +1,9 @@
 package sortable
 
 type Element interface {
-	GetUniqueID() int64
+	GetUniqueID() uint64
 
-	GetSortIndex() int
+	GetSortIndex() uint32
 
-	UpdateSortIndex(sortIndex int)
+	UpdateSortIndex(sortIndex uint32)
 }
