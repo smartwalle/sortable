@@ -37,7 +37,7 @@ func Sort(dataSource DataSource, source Element, target Element) error {
 			// 往前移动，其它元素的排序 +1
 			ele.UpdateSortIndex(ele.GetSortIndex() + 1)
 		} else {
-			// 往后移动，其实元素的排序 -1
+			// 往后移动，其它元素的排序 -1
 			ele.UpdateSortIndex(ele.GetSortIndex() - 1)
 		}
 	}
